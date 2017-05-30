@@ -3,9 +3,9 @@
   src: url('../fonts/COMIC.TTF') format('truetype');
 }
 body {
-    background-color: limegreen;
+    background-color: orange;
     font-family: "Comic Sans MS";
-    color: darkblue;
+    color: limegreen;
 }
 input{
     position: absolute;
@@ -20,4 +20,9 @@ h3{
 
 .blog-post-meta{
     color:white;
+}
+
+.sidebar-module{
+    background-color: hotpink;
+    color: lightblue;
 }
