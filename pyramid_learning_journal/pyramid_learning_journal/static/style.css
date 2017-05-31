@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'Comic Sans MS';
+  src: url('../fonts/COMIC.TTF') format('truetype');
+}
+body {
+    background-color: orange;
+    font-family: "Comic Sans MS";
+    color: limegreen;
+}
+input{
+    position: absolute;
+}
+textarea {
+    position: absolute;
+    top: 85px;
+}
+h3{
+    color: crimson;
+}
+
+.blog-post-meta{
+    color:white;
+}
+
+.sidebar-module{
+    background-color: hotpink;
+    color: lightblue;
+}

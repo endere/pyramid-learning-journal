@@ -1,0 +1,3 @@
+[run]
+source = pyramid_learning_journal
+omit = pyramid_learning_journal/test*
