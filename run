@@ -1,5 +1,5 @@
 #!/bin/bash
 set -e
-cd expense_tracker
+cd pyramid-learning-journal
 python3.6 setup.py develop #like writing pip install -e., but more explicit
 python3.6 runapp.py
