@@ -2,10 +2,22 @@
   font-family: 'Comic Sans MS';
   src: url('../fonts/COMIC.TTF') format('truetype');
 }
+@font-face {
+  font-family: 'Zapfino';
+  src: url('../fonts/42251_ZapfinoLinotypeOne.ttf') format('truetype');
+}
 body {
     background-color: orange;
     font-family: "Comic Sans MS";
     color: limegreen;
+}
+.blog-post-title{
+    font-family: "Comic Sans MS";
+    color: purple;
+}
+h1{
+    font-family: "Zapfino";
+    color: darkgreen;
 }
 input{
     position: absolute;
