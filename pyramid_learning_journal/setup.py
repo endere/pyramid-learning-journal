@@ -1,3 +1,4 @@
+"""Setup for Pyramid Learning Journal."""
 import os
 
 from setuptools import setup, find_packages
@@ -27,7 +28,6 @@ setup(
     name='pyramid_learning_journal',
     version='0.0',
     description='learning_journal',
-    # long_description=README + '\n\n' + CHANGES,
     classifiers=[
         'Programming Language :: Python',
         'Framework :: Pyramid',
