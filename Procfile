@@ -1,1 +1,1 @@
-web: ./pyramid_learning_journal/run
+web: ./run
