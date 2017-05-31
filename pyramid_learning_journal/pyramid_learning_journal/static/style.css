@@ -7,6 +7,10 @@ body {
     font-family: "Comic Sans MS";
     color: limegreen;
 }
+.blog-post-title{
+    font-family: "Comic Sans MS";
+    color: purple;
+}
 input{
     position: absolute;
 }
