@@ -138,3 +138,21 @@ def test_entry_view_returns_proper_content(entry_response):
     response = detail_view(request)
     expected_text = '<h2 class="blog-post-title">Sample journal post</h2>'
     assert expected_text in response.text
+
+
+
+#_____-----------------------------___________________________
+@pytest.fixture
+def testapp():
+    from python_learning_journal import main
+    from webtest import TestApp
+    app = main({})
+    return TestApp(app)
+
+
+def test_list_route_has_list_of_entries(testapp):
+    response = testapp.get('/')
+    html = response.html
+    assert html.find()
+    num_list_items = (len(html.find_all('li')))
+    assert num_list_items == len(Posts)
