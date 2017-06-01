@@ -1,12 +1,7 @@
 """Views for learning journal."""
-from pyramid.response import Response
 from pyramid.view import view_config
 from pyramid_learning_journal.data.data import Posts
 from pyramid.httpexceptions import HTTPNotFound
-import os
-import io
-
-HERE = os.path.dirname(__file__)
 
 
 @view_config(route_name='home', renderer='../templates/home.jinja2')
