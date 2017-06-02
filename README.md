@@ -20,8 +20,7 @@
     -create view for making a new entry to new-entry.html
     -edit view for editing an entry to edit_entry.html
     
-    
-    ```
+```
 ----------- coverage: platform linux, python 3.6.1-final-0 -----------
 Name                                           Stmts   Miss  Cover
 ------------------------------------------------------------------
