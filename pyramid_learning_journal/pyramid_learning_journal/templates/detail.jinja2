@@ -1,0 +1,14 @@
+{% extends "layout.jinja2" %}
+{% block content %}
+        <div class="col-sm-8 blog-main">
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">{{entry.title}}</h2>
+            <p class="blog-post-meta">{{entry.creation_date}}</p>
+              <p>{{entry.body}}</p>
+              <button type="button" class="btn"><a href="{{request.route_url('edit', id=entry.id)}}">Edit</a></button>
+          </div><!-- /.blog-post -->
+
+        </div><!-- /.blog-main -->
+
+{% endblock %}
