@@ -21,7 +21,7 @@
     -edit view for editing an entry to edit_entry.html
     
     
-  
+  ```
 ----------- coverage: platform linux, python 3.6.1-final-0 -----------
 Name                                           Stmts   Miss  Cover
 ------------------------------------------------------------------
@@ -31,3 +31,4 @@ pyramid_learning_journal/scripts/__init__.py       0      0   100%
 pyramid_learning_journal/views/default.py         27      0   100%
 ------------------------------------------------------------------
 TOTAL                                             28      0   100%
+```
