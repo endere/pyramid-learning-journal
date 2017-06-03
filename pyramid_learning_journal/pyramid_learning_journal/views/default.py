@@ -68,3 +68,6 @@ def edit_view(request):
         return HTTPFound(request.route_url('detail', id=entry.id))
 
 
+
+
+
