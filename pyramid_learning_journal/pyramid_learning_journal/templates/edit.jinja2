@@ -4,9 +4,10 @@
          <section>
          <!-- This form copy pasted from class 301's kilovolt blog. -->
         <h1>Edit Journal entry</h1>
-        <form action="#" id="new-form">
-            <input type="text" id="article-title" value="{{entry.title}}" required>
-          <textarea id="article-body" rows="8" cols="40" required>{{entry.body}}</textarea>
+        <form method="POST" id="new-form">
+          <input type="text" name="title" id="article-title" value="{{entry.title}}" required>
+          <textarea id="article-body" name="body" rows="8" cols="40" required>{{entry.body}}</textarea>
+          <input type="submit" value="Submit">
         </form>
       </section>
 
