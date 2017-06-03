@@ -1,0 +1,10 @@
+                                                      Table "public.entries"
+    Column     |       Type        |                      Modifiers                       | Storage  | Stats target | Description 
+---------------+-------------------+------------------------------------------------------+----------+--------------+-------------
+ id            | integer           | not null default nextval('entries_id_seq'::regclass) | plain    |              | 
+ title         | character varying |                                                      | extended |              | 
+ body          | character varying |                                                      | extended |              | 
+ creation_date | character varying |                                                      | extended |              | 
+Indexes:
+    "pk_entries" PRIMARY KEY, btree (id)
+
