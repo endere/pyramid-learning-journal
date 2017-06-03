@@ -1,10 +1,21 @@
 """Instantiate the inclusion."""
 from pyramid.config import Configurator
 import os
+import psycopg2
+import urlparse
 
 
 def main(global_config, **settings):
     """Function returns a Pyramid WSGI application."""
+    urlparse.uses_netloc.append("postgres")
+    url = urlparse.urlparse(os.environ["DATABASE_URL"])
+    conn = psycopg2.connect(
+        database=url.path[1:],
+        user=url.username,
+        password=url.password,
+        host=url.hostname,
+        port=url.port
+        )
     settings['sqlalchemy.url'] = os.environ.get('DATABASE_URL')
     config = Configurator(settings=settings)
     config.include('pyramid_jinja2')
