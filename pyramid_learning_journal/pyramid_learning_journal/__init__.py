@@ -14,3 +14,5 @@ def main(global_config, **settings):
     config.add_static_view(name='static', path='pyramid_learning_journal:static')
     config.scan()
     return config.make_wsgi_app()
+
+
