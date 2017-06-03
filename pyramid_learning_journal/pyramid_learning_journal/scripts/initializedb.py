@@ -15,7 +15,9 @@ from ..models import (
     get_session_factory,
     get_tm_session,
     )
-from ..models import MyModel
+from ..models import Entry
+import datetime
+from pyramid_learning_journal.data.data import Posts
 
 
 def usage(argv):
@@ -34,6 +36,7 @@ def main(argv=sys.argv):
     settings = get_appsettings(config_uri, options=options)
 
     engine = get_engine(settings)
+    Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
 
     session_factory = get_session_factory(engine)
@@ -41,5 +44,12 @@ def main(argv=sys.argv):
     with transaction.manager:
         dbsession = get_tm_session(session_factory, transaction.manager)
 
-        model = MyModel(name='one', value=1)
-        dbsession.add(model)
+        many_entries = []
+        for item in Posts:
+            new_entry = Entry(
+                title=item['title'],
+                body=item['body'],
+                creation_date=item['creation_date']
+            )
+            many_entries.append(new_entry)
+        dbsession.add_all(many_entries)
