@@ -13,7 +13,7 @@ def main(global_config, **settings):
         user='erik',
         password='1234',
         host='localhost',
-        port='5432'
+        port=5432
     )
     config = Configurator(settings=settings)
     config.include('pyramid_jinja2')
