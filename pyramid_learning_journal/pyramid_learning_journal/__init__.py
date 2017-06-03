@@ -7,8 +7,14 @@ import psycopg2
 def main(global_config, **settings):
     """Function returns a Pyramid WSGI application."""
     settings['sqlalchemy.url'] = os.environ.get('DATABASE_URL')
-    conn_string = "host='localhost:5432' dbname='learning_journal' user='erik' password='1234'"
-    conn = psycopg2.connect(conn_string)
+    #conn_string = "host='localhost:5432' dbname='learning_journal' user='erik' password='1234'"
+    conn = psycopg2.connect(
+        database='learning_journal',
+        user='erik',
+        password='1234',
+        host='localhost',
+        port=5432
+    )
     config = Configurator(settings=settings)
     config.include('pyramid_jinja2')
     config.include('.routes')
