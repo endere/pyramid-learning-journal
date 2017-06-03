@@ -13,6 +13,7 @@ import datetime
 def list_view(request):
     """Open home page with list of entries."""
     session = request.dbsession
+    import pdb; pdb.set_trace()
     all_entries = session.query(Entry).order_by(Entry.id.desc()).all()
     return {'page': 'home', "posts": all_entries}
 
