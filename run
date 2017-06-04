@@ -3,3 +3,4 @@ set -e
 cd pyramid_learning_journal
 python3.6 setup.py develop #like writing pip install -e., but more explicit
 python3.6 runapp.py
+initializedb production.ini

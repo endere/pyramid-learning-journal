@@ -35,7 +35,8 @@ def create_view(request):
         if not request.POST['title'] or not request.POST['body']:
             return {
                 'title': request.POST['title'],
-                'body': request.POST['body']
+                'body': request.POST['body'],
+                'error': 'Please fill both fields.'
             }
         the_date=datetime.datetime.now()
         new_entry = Entry(
