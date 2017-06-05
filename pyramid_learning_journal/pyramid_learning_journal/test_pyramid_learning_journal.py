@@ -1,6 +1,6 @@
 """Test for views creation and link to html pages."""
 from pyramid import testing
-from pyramid_learning_journal.data.data import posts
+from pyramid_learning_journal.data.data import Posts
 import pytest
 import transaction
 from pyramid_learning_journal.models import (
