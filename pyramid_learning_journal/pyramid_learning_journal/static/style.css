@@ -1,4 +1,4 @@
-@font-face {
+/*@font-face {
   font-family: 'Comic Sans MS';
   src: url('/static/fonts/COMIC.TTF') format('truetype');
 }
@@ -20,10 +20,10 @@ h1{
     color: darkgreen;
 }
 input{
-    position: absolute;
+    position: relative;
 }
 textarea {
-    position: absolute;
+    position: relative;
     top: 85px;
 }
 h3{
@@ -37,4 +37,4 @@ h3{
 .sidebar-module{
     background-color: hotpink;
     color: lightblue;
-}
+}*/
