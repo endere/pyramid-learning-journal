@@ -98,6 +98,7 @@ def test_detail_entry_returns_proper_content(testapp):
     expected_text = '<h2 class="blog-post-title">5/27/17 journal</h2>'
     assert expected_text in str(html)
 
+
 def test_detail_entry_has_404(testapp):
     """Check to see if detail view 404s properly."""
     response = testapp.get('/journal/100', status=404)
