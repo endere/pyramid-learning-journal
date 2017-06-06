@@ -11,6 +11,7 @@ def main(global_config, **settings):
     config.include('pyramid_jinja2')
     config.include('.routes')
     config.include('.models')
+    config.include('.security')
     # config.include('.views')
     config.add_static_view(name='static', path='pyramid_learning_journal:static')
     config.scan()
