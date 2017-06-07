@@ -3,6 +3,7 @@ import os
 from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 from pyramid.security import Everyone, Authenticated, Allow
+from pyramid.session import SignedCookieSessionFactory
 from passlib.apps import custom_app_context as context
 
 
@@ -17,7 +18,8 @@ class MyRoot(object):
 
 
 def check_credentials(username, password):
-    """Check credentials of a new user.
+    """Checks credentials of a new user.
+
     Return True if it checks out; otherwise return False."""
     stored_username = os.environ.get('AUTH_USERNAME', '')
     stored_password = os.environ.get('AUTH_PASSWORD', '')
@@ -40,3 +42,8 @@ def includeme(config):
     authz_policy = ACLAuthorizationPolicy()
     config.set_authorization_policy(authz_policy)
     config.set_root_factory(MyRoot)
+
+    session_secret = os.environ.get('SESSION_SECRET')
+    session_factory = SignedCookieSessionFactory(session_secret)
+    config.set_session_factory(session_factory)
+    config.set_default_csrf_options(require_csrf=True)

@@ -78,7 +78,7 @@ def edit_view(request):
         return HTTPFound(request.route_url('detail', id=entry.id))
 
 
-@view_config(route_name='login', renderer='/templates/login.jinja2')
+@view_config(route_name='login', renderer='/templates/login.jinja2', require_csrf=False)
 def login(request):
     if request.method == "GET":
         return {}
