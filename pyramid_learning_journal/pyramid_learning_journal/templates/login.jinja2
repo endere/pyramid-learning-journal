@@ -1,0 +1,17 @@
+{% extends "layout.jinja2" %}
+{% block content %}
+
+{{ error }}
+
+<div class="blog-header">
+    <h1 class="blog-title">Login</h1>
+</div>
+<div class="col-sm-8 blog-main">
+    <form method="POST">
+                <input placeholder='username' type="text" name="username" required />
+                <input placeholder='password' type="password" name="password" pattern="[\w]+" required />
+                <input type="submit" value="Log In"/>
+
+    </form>
+</div>
+{% endblock %}
