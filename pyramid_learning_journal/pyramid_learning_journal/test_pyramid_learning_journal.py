@@ -1,8 +1,15 @@
 """Test for views creation and link to html pages."""
-from pyramid_learning_journal.data.data import Posts
 from pyramid import testing
+from pyramid_learning_journal.data.data import Posts
 import pytest
 import os
+
+import transaction
+from pyramid_learning_journal.models import (
+    Entry,
+    get_tm_session,
+)
+from pyramid_learning_journal.models.meta import Base
 from pyramid_learning_journal.views.default import (
     list_view,
     create_view,
@@ -54,10 +61,65 @@ def db_session(configuration, request):
 @pytest.fixture
 def testapp():
     """Create a test application to use for functional tests."""
-    from pyramid_learning_journal import main
     from webtest import TestApp
+    from pyramid.config import Configurator
+    import os
+
+    def main(global_config, **settings):
+        """Function returns a Pyramid WSGI application."""
+        settings['sqlalchemy.url'] = os.environ.get('TEST_DATABASE')
+        config = Configurator(settings=settings)
+        config.include('pyramid_jinja2')
+        config.include('.models')
+        config.include('.routes')
+        config.add_static_view(name='static', path='pyramid_learning_journal:static')
+        config.scan()
+        return config.make_wsgi_app()
+
     app = main({})
+
     return TestApp(app)
+
+
+@pytest.fixture
+def db_session(configuration, request):
+    """."""
+    SessionFactory = configuration.registry['dbsession_factory']
+    session = SessionFactory()
+    engine = session.bind
+    Base.metadata.creat_all(engine)
+
+    def teardown():
+        session.transaction.rollback()
+        Base.metadata.drop_all(engine)
+
+    request.addfinalizer(teardown)
+    return session
+
+
+@pytest.fixture
+def dummy_request(db_session):
+    """."""
+    req = testing.DummyRequest()
+    req.dbsession = db_session
+    return req
+
+
+@pytest.fixture
+def post_request(dummy_request):
+    """."""
+    dummy_request.method = "POST"
+    return dummy_request
+
+
+@pytest.fixture
+def get_request(dummy_request):
+    """."""
+    dummy_request.method = "GET"
+    return dummy_request
+
+
+# got to here.
 
 
 @pytest.fixture
