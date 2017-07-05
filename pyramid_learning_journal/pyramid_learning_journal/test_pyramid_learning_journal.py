@@ -2,6 +2,8 @@
 from pyramid import testing
 from pyramid_learning_journal.data.data import Posts
 import pytest
+import os
+
 import transaction
 from pyramid_learning_journal.models import (
     Entry,
@@ -14,6 +16,46 @@ from pyramid_learning_journal.views.default import (
     detail_view,
     edit_view
 )
+from pyramid_learning_journal.models.meta import Base
+from pyramid.httpexceptions import HTTPNotFound
+
+
+@pytest.fixture
+def dummy_request(db_session):
+    """Make a fake HTTP request."""
+    return testing.DummyRequest(dbsession=db_session)
+
+
+@pytest.fixture(scope="session")
+def configuration(request):
+    """Set up a Configurator instance."""
+    config = testing.setUp(settings={
+        'sqlalchemy.url': os.environ.get('TEST_DATABASE')
+    })
+    config.include('pyramid_learning_journal.models')
+    config.include('pyramid_learning_journal.routes')
+
+    def teardown():
+        testing.tearDown()
+
+    request.addfinalizer(teardown)
+    return config
+
+
+@pytest.fixture
+def db_session(configuration, request):
+    """Create a session for interacting with the test database."""
+    SessionFactory = configuration.registry['dbsession_factory']
+    session = SessionFactory()
+    engine = session.bind
+    Base.metadata.create_all(engine)
+
+    def teardown():
+        session.transaction.rollback()
+        Base.metadata.drop_all(engine)
+
+    request.addfinalizer(teardown)
+    return session
 
 
 @pytest.fixture
@@ -182,3 +224,51 @@ def test_edit_entry_has_404(testapp):
     assert html.find()
     expected_text = '<p class="lead"><span class="font-semi-bold">404</span> Page Not Found</p>'
     assert expected_text in str(html)
+
+
+def test_list_view_returns_dict(dummy_request):
+    """Test list view returns a dict when called."""
+    assert type(list_view(dummy_request)) == dict
+
+
+def test_detail_view_with_id_raises_except(dummy_request):
+    """Test proper error raising with non matching id on detail view."""
+    dummy_request.matchdict['id'] = '9000'
+    with pytest.raises(HTTPNotFound):
+        detail_view(dummy_request)
+
+
+def test_create_view_returns_dict(dummy_request):
+    """Test create view returns a dict when called."""
+    assert type(create_view(dummy_request)) == dict
+
+
+def test_edit_view_with_id_raises_except(dummy_request):
+    """Test proper error raising with non matching id on edit view."""
+    dummy_request.matchdict['id'] = '9000'
+    with pytest.raises(HTTPNotFound):
+        edit_view(dummy_request)
+
+
+def test_create_view_returns_200(testapp, db_session):
+    """Look for a 200 in create view."""
+    response = testapp.get('/journal/new-entry')
+    assert response.status_code == 200
+
+
+def test_home_view_returns_200(testapp, db_session):
+    """Look for a 200 in home view."""
+    response = testapp.get('/')
+    assert response.status_code == 200
+
+
+def test_edit_view_returns_200(testapp, db_session):
+    """Look for a 200 in edit view."""
+    response = testapp.get('/journal/0/edit-entry')
+    assert response.status_code == 200
+
+
+def test_detail_view_returns_200(testapp, db_session):
+    """Look for a 200 in detail view."""
+    response = testapp.get('/journal/0')
+    assert response.status_code == 200
