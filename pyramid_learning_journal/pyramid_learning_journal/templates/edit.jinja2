@@ -1,0 +1,23 @@
+{% extends "layout.jinja2" %}
+{% block content %}
+
+        <div class="blog-header">
+            <h1 class="blog-title">Edit Entry</h1>
+        </div>
+        <div class="col-sm-8 blog-main">
+         <section>
+         <!-- This form copy pasted from class 301's kilovolt blog. -->
+        <h1>Edit Journal entry</h1>
+        <form method="POST" id="new-form">
+          <input type="hidden" name="csrf_token" value="{{ request.session.get_csrf_token() }}" />
+          <input type="text" name="title" id="article-title" value="{{entry.title}}" required>
+          <textarea id="article-body" name="body" rows="8" cols="40" required>{{entry.body}}</textarea>
+          <input type="submit" value="Submit">
+        </form>
+      </section>
+
+        </div><!-- /.blog-main -->
+{% endblock %}
+
+
+

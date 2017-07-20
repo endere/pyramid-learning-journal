@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- This is code imported in from bootstraps. It is not mine. At all. -->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+
+    <title>Erik's journal</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ request.static_path('pyramid_learning_journal:static/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ request.static_path('pyramid_learning_journal:static/blog.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ request.static_path('pyramid_learning_journal:static/style.css') }}">
+  </head>
+
+  <body>
+
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item" href="{{request.route_url('home')}}">Home</a>
+          {% if userauth %}<a class="blog-nav-item" href="{{request.route_url('create')}}"">Create</a>{% endif %}
+          {% if not userauth %}<a class="blog-nav-item" href="{{request.route_url('login')}}">Login</a>{% endif %}
+          {% if userauth %}<a class="blog-nav-item" href="{{request.route_url('logout')}}">Logout</a>{% endif %}
+        </nav>
+      </div>
+    </div>
+
+    <div class="container">
+
+
+      <div class="row">
+      {% block content %}{% endblock %}
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>About</h4>
+            <p>This is my journal site! Where I keep my journal things! After my python 401 class is over, I am considering refactoring it into a personal blog and portfolio site, as this is already substantially more complicated than what we made in 301.</p>
+          </div>
+          <div class="sidebar-module">
+            <h4>Elsewhere</h4>
+            <ol class="list-unstyled">
+              <li><a href="https://github.com/endere">GitHub</a></li>
+              <!-- <li><a href="#">Twitter</a></li> -->
+              <li><a href="http://facebook.com/profile.php?=73322363">Facebook</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
