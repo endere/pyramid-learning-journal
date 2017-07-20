@@ -1,0 +1,43 @@
+/*@font-face {
+  font-family: 'Comic Sans MS';
+  src: url('/static/fonts/COMIC.TTF') format('truetype');
+}
+@font-face {
+  font-family: 'Zapfino';
+  src: url('/static/fonts/42251_ZapfinoLinotypeOne.ttf') format('truetype');
+}
+body {
+    background-color: orange;
+    font-family: "Comic Sans MS";
+    color: limegreen;
+}
+.blog-post-title{
+    font-family: "Comic Sans MS";
+    color: purple;
+}
+h1{
+    font-family: "Zapfino";
+    color: darkgreen;
+}
+input{
+    position: relative;
+}
+textarea {
+    position: relative;
+    top: 85px;
+}
+h3{
+    color: crimson;
+}
+
+.blog-post-meta{
+    color:white;
+}
+
+.sidebar-module{
+    background-color: hotpink;
+    color: lightblue;
+}*/
+.row{
+  float right
+}
