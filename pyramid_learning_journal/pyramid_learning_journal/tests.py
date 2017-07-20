@@ -156,7 +156,6 @@ def test_detail_view_returns_dict_with_db(db_session, dummy_request):
         body=u'Some thing goes here.',
         creation_date=datetime.datetime.now(),
     )
-    print(fake)
     db_session.add(fake)
     fakeid = str(db_session.query(Entry)[0].id)
     dummy_request.matchdict['id'] = fakeid
@@ -169,7 +168,7 @@ def test_create_view_returns_dict(dummy_request):
     assert type(create_view(dummy_request)) == dict
 
 
-def test_edit_view_returns_dict_with_db(dummy_request, db_session):
+def test_edit_view_returns_dict_with_db(testapp, db_session):
     """Test edit view returns a dict when called with a db."""
     fake = Entry(
         title=u'Stuff',
@@ -179,6 +178,8 @@ def test_edit_view_returns_dict_with_db(dummy_request, db_session):
     db_session.add(fake)
     fakeid = str(db_session.query(Entry)[0].id)
     dummy_request.matchdict['id'] = fakeid
+    response = testapp.get('/journal/1/edit-entry')
+---------------------------
     response = edit_view(dummy_request)
     assert type(response) == dict
 
